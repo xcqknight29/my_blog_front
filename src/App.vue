@@ -1,24 +1,19 @@
 <template>
-  <div id="app">
-    <el-container>
-      <el-aside>
-        <MenuList></MenuList>
-      </el-aside>
-      <el-main>
-        <RouterView></RouterView>
-      </el-main>
-    </el-container>
-  </div>
+    <RouterView></RouterView>
 </template>
 
 <script>
-  import {RouterView} from 'vue-router'
-  import MenuList from './components/MenuList.vue'
+    import {RouterView} from 'vue-router'
 
-  export default {
-    name: 'app',
-    components: {
-      MenuList
+    export default {
+        name: 'app',
+        class: 'full-height',
+        components: {},
     }
-  }
 </script>
+
+<style>
+#app {
+    height: 100%;
+}
+</style>

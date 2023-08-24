@@ -8,6 +8,7 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import axios from './config/request'
 import VueAxios from 'vue-axios'
+import '@/assets/style/common.css'
 
 const app = createApp(App)
 
