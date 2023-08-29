@@ -3,7 +3,7 @@
 <div class="tologin">
     <div>
         <span class="block color_gred">完成登录后才能访问页面哦</span><br>
-        <el-button class="block center">登录</el-button>
+        <el-button class="block center" @click="toLoginPage">登录</el-button>
     </div>
 </div>
 </template>
@@ -12,10 +12,13 @@
 export default {
     name: 'ToLogin',
     data() {
-        return {
-            
+        return {}
+    },
+    methods: {
+        toLoginPage() {
+            this.$router.push({name: 'login'})
         }
-    }
+    },
 }
 </script>
 

@@ -5,34 +5,49 @@ const router = createRouter({
     routes: [
         {
             path: '/',
+            redirect: 'writer/list',
+        },
+        {
+            path: '/writer',
             component: () => import('../views/MainApp.vue'),
             children: [
                 {
-                    path: '/',
-                    redirect: 'list',
+                    path: '',
+                    redirect: 'writer/list'
                 }, {
-                    path: '/list',
+                    path: 'login',
+                    name: 'writer-login',
+                    component: () => import('../views/ToLogin.vue'),
+                },  {
+                    path: 'list',
+                    name: 'writer-list',
                     component: () => import('../views/ArticleList.vue'),
                 }, {
-                    path: '/write/:articleId?',
+                    path: 'edit/:articleId?',
+                    name: 'writer-edit',
                     component: () => import('../views/WriteArticle.vue'),
                 }, {
-                    path: '/class',
+                    path: 'class',
+                    name: 'writer-class',
                     component: () => import('../views/ClassMenege.vue'),
                 }, {
-                    path: '/user',
-                    component: () => import('../views/TemPage.vue'),
+                    path: 'user',
+                    name: 'writer-user',
+                    component: () => import('../views/Test.vue'),
                 }, {
-                    path: '/timeline',
+                    path: 'timeline',
+                    name: 'writer-timeline',
                     component: () => import('../views/TimeLine.vue'),
                 }, {
-                    path: '/test',
+                    path: 'test',
+                    name: 'writer-test',
                     component: () => import('../views/Test.vue'),
                 }
             ],
         }, {
             path: '/login',
-            component: () => import('../views/ToLogin.vue')
+            name: 'login',
+            component: () => import('../views/LoginPage.vue')
         },
 
     ]
