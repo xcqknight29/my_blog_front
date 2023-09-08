@@ -1,7 +1,7 @@
 <!-- 管理分类页面 -->
 
 <template>
-    <el-text style="">点击 tag 修改分类名称</el-text><br/>
+    <el-text style="">点击修改分类名称</el-text><br/>
     <!-- 循环显示文章分类tag -->
     <ClassTag 
     v-for="classSelect in classList" 
@@ -9,7 +9,7 @@
     @deleteHandler="deleteHandler"
     @editClassSubmit="editClassSubmit"></ClassTag>
     <!-- 添加分类组件 -->
-    <ClassAdder @addClassSubmit="addClassSubmit"></ClassAdder>
+    <ClassAdder @addSubmitted="getClassList"></ClassAdder>
 </template>
 
 <script>
@@ -23,15 +23,9 @@ export default {
         ClassTag,
         ClassAdder,
     },
-    data() {
-        return {
-        classList: [
-            {name: "class1", articleNum: 3},
-            {name: "class2", articleNum: 2},
-            {name: "class3", articleNum: 1},
-        ]
-        };
-    },
+    data() { return {
+        classList: []
+    }},
     created() {
         this.getClassList();
     },
@@ -39,13 +33,13 @@ export default {
         // 获取分类信息
         async getClassList() {
             const method = 'get';
-            const url = '/write/class';
-            try {
-                let result = await this.axios({ method: method, url: url });
-            } catch (error) {
+            const url = '/writer/classification';
+            const [error,result] = await this.$send(method, url);
+            if(error) {
                 this.$message({ type: 'error', message: error });
+                return;
             }
-            this.classList = result.records;
+            this.classList = result.data;
         },
         // 提交分类更改
         editClassSubmit(input, originClass) {
@@ -53,22 +47,25 @@ export default {
                 this.$message({ message: ('分类名不能为空') });
                 return;
             }
-            if (input === originClass.name) {
+            if (input === originClass.classification_name) {
                 this.$message({ message: ('未更改') });
                 return;
             }
-            this.$confirm(("确定将分类" + originClass.name + "更改为" + input + "吗？\n有" + originClass.articleNum + "篇文章属于该分类。"), {
+            this.$confirm(("确定将分类" + originClass.classification_name + "更改为" + input + "吗？\n有" + originClass.article_num + "篇文章属于该分类。"), {
                 confirmButtonText: "确定",
                 cancelButtonText: "返回",
                 type: "info",
-            }).then(() => {
-                const method = 'post';
-                const url = 'class/edit';
-                const data = { className: input };
-                this.axios({ method: method, url: url, data: data }) // 发送请求
-                    .then((result) => {
-                        console.log(result);
-                    });
+            }).then(async () => {
+                const method = 'put';
+                const url = '/writer/classification';
+                const data = { id: originClass.id, classification_name: input };
+                const [error,result] = await this.$send(method, url, null, data);
+                if(error) {
+                    this.$message({type: "error", message: error});
+                    return;
+                }
+                this.$message({type: 'success', message: '修改成功'});
+                this.getClassList();
             })
         },
         // 弹出消息框确认删除分类
@@ -86,20 +83,6 @@ export default {
                         console.log(result);
                     }))
             });
-        },
-        // 提交添加分类
-        addClassSubmit(input) {
-            if (input === '') {
-                this.$message({ message: ('分类名不能为空') });
-                return;
-            }
-            const method = 'post';
-            const url = 'class/add';
-            const data = { className: input };
-            this.axios({ method: method, url: url, data: data }) // 发送请求
-                .then((result) => {
-                    console.log(result);
-                });
         },
     },
 }

@@ -24,7 +24,7 @@ export default {
     name: 'UserMessage',
     data() {
         return {
-            username: '这是用户名这是用户名这是用户名这是用户名',
+            username:'这是用户名这是用户名这是用户名这是用户名',
         }
     },
 }

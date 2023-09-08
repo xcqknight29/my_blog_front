@@ -16,12 +16,13 @@
 import { getClassification } from '../static/js/get_data'
 export default {
     name: "WriteArticle",
+    emits: ['menuJump'],
     data() {
         return {
             articleId: 0,
-            classId: 0,
+            classId: '',
             title: '',
-            articleText: 'asd',
+            articleText: '',
             classList: [{ id: 1, classification_name: 'class1' }]
         };
     },
@@ -49,17 +50,17 @@ export default {
         async submitArticle() {
             let messageArray = [];
             // 校验分类\标题\正文是否为空
-            if (this.className === "") {
+            if (this.classId === '') {
                 messageArray.push("分类");
             }
-            if (this.title === "") {
+            if (this.title === '') {
                 messageArray.push("标题");
             }
-            if (this.articleText === "") {
+            if (this.articleText === '') {
                 messageArray.push("正文");
             }
             if (messageArray.length > 0) {
-                this.$message({type: 'info', messsage: (messageArray.toLocaleString() + "不能为空")});
+                this.$message({type: 'info', message: (messageArray.toLocaleString() + "不能为空")});
                 return;
             }
             const method = this.$route.params.articleId ? 'put' : 'post';
@@ -75,6 +76,7 @@ export default {
                 this.$message({type: 'error', message: error});
             } else {
                 this.$message({message: '上传成功'});
+                this.$emit('menuJump','1')
                 this.$router.push({name: 'writer-list'});
             }
         }

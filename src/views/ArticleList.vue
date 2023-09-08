@@ -32,44 +32,37 @@
 <script>
 export default {
     name: "ArticleList",
+    emits: ['menuJump'],
     data() {
         return {
             page: 1,
             total: 0,
             size: 20,
             input: '',
-            tableData: [
-                // {
-                //     id: 0,
-                //     title: 'test article',
-                //     author: 0,
-                //     classification: 0,
-                //     create_time: '2015-01-01-01T00:00:00',
-                //     last_update: '2015-01-01-01T00:00:00',
-                // }
-            ],
-        };
+            tableData: [],
+        }
     },
     mounted() {
-        this.getArticle();
+        this.getArticle()
     },
     methods: {
         async getArticle() {
-            const method = 'get';
-            const url = '/writer/article';
-            const params = {page: this.page, size: this.size, input: this.input};
-            const [error,result] = await this.$send(method, url, params);
+            const method = 'get'
+            const url = '/writer/article'
+            const params = {page: this.page, size: this.size, input: this.input}
+            const [error,result] = await this.$send(method, url, params)
             if (error) {
-                this.$message({type: 'error', message: error});
+                this.$message({type: 'error', message: error})
             } else {
-                this.tableData = result.data;
+                this.tableData = result.data
             }
         },
         clearInput() {
-            this.input = '';
+            this.input = ''
         },
         toWrite(row) {
-            this.$router.push({ name: 'writer-edit', params: { articleId: row.id } });
+            this.$emit('menuJump','2')
+            this.$router.push({name:'writer-edit', params:{articleId:row.id}})
         },
     }
 }

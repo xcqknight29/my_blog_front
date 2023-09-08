@@ -3,7 +3,7 @@
 <template>
   <el-tag v-if="!editing" size="large" closable style="margin: 0 5px;" @close="$emit('deleteHandler', classSelect)">
     <span @click="editing = true">
-      {{ classSelect.name + '[' + classSelect.articleNum + ']'}}
+      {{ classSelect.classification_name + '[' + classSelect.article_num + ']'}}
     </span>
   </el-tag>
   <div class="block_editing" v-else>
@@ -14,7 +14,7 @@
         </el-icon>
       </template>
     </el-input>
-    <el-icon class="submit_icon" size="large" color="#67C23A" @click="$emit('editClassSubmit', inputContent, classSelect);">
+    <el-icon class="submit_icon" size="large" color="#67C23A" @click="submitChange">
       <check/>
     </el-icon>
   </div>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       editing: false,
-      inputContent: this.classSelect.name,
+      inputContent: this.classSelect.classification_name,
     };
   },
   props: ['classSelect'],
@@ -35,7 +35,11 @@ export default {
   methods: {
     cancelEditing() {
       this.editing = false;
-      this.inputContent = this.classSelect.name;
+      this.inputContent = this.classSelect.classification_name;
+    },
+    submitChange() {
+      this.$emit('editClassSubmit', this.inputContent, this.classSelect);
+      this.editing = false;
     },
   },
 }
