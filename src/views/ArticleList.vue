@@ -49,7 +49,7 @@ export default {
         async getArticle() {
             const method = 'get'
             const url = '/writer/article'
-            const params = {page: this.page, size: this.size, input: this.input}
+            const params = {page:this.page, size:this.size, input:this.input}
             const [error,result] = await this.$send(method, url, params)
             if (error) {
                 this.$message({type: 'error', message: error})

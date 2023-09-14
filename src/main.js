@@ -9,7 +9,7 @@ import 'mavon-editor/dist/css/index.css'
 import axios from './config/request'
 import VueAxios from 'vue-axios'
 import '@/assets/style/common.css'
-import { send } from './static/js/send_request'
+import { send, sendAndThrow } from './static/js/send_request'
 
 const app = createApp(App)
 
@@ -21,5 +21,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(mavonEditor)
 app.use(VueAxios, axios)
 app.config.globalProperties.$send = send
+app.config.globalProperties.$sendAndThrow = sendAndThrow
 
 app.mount('#app')

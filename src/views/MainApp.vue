@@ -17,6 +17,7 @@ import UserMessage from '../components/UserMessage.vue'
 export default {
     name: 'MainApp',
     components: {
+        RouterView,
         MenuList,
         UserMessage,
     },
@@ -25,7 +26,6 @@ export default {
     }},
     methods:{
         menuJump(selectIndex){
-            console.log(selectIndex)
             this.selectedItem = selectIndex
         }
     },

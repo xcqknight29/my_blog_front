@@ -7,7 +7,7 @@
             <el-menu-item index="3" route="/writer/class">管理分类</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group class="line_bot_dashed">
-            <el-menu-item index="4" route="/writer/user">管理用户</el-menu-item>
+            <el-menu-item index="4" route="/writer/userList">管理用户</el-menu-item>
             <el-menu-item index="5" route="/writer/timeline">时间线</el-menu-item>
         </el-menu-item-group>
     </el-menu>
