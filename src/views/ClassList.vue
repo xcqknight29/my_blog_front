@@ -50,12 +50,12 @@
   width:30%;
   height:60px;
   margin:10px;
-  background-color:#353535;
+  background-color:#e7e7e7;
   border-radius:4px;
 }
 .item_name{
   font-size:24px;
-  color:#d7d7d7;
+  color:#353535;
   margin:10px 10%;
 }
 .item_name:hover{color:#409eff;}
