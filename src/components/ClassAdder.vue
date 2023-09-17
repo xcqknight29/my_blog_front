@@ -45,6 +45,7 @@ export default {
         return
       }
       this.addingClass = false
+      this.$refs['input_add'].clear()
       this.$emit('addSubmitted')
     },
     cancelAdding() {

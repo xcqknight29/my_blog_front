@@ -45,8 +45,9 @@ export default {
     size:20,
     articleList:[],
   }},
-  mounted() {
+  created() {
     this.className = this.$route.params.className
+    this.$emit('menuChange',2)
     this.getArticleByClass()
   },
   methods:{

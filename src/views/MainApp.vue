@@ -1,14 +1,27 @@
 <template>
-<el-container>
-    <el-aside>
+<ElContainer>
+    <ElAside>
         <MenuList class="menulist" :selectedItem="selectedItem"></MenuList>
         <UserMessage class="usermessage"></UserMessage>
-    </el-aside>
-    <el-main>
+    </ElAside>
+    <ElMain>
         <RouterView @menuJump="menuJump"></RouterView>
-    </el-main>
-</el-container>
+    </ElMain>
+</ElContainer>
 </template>
+
+<style scoped>
+.page_footer{
+  height:200px;
+}
+.footer_block {
+  width:30%;
+  display:inline-block;
+}
+.footer_reader_menu {display:inline-flex;}
+.footer_menu{list-style-type:none;}
+.footer_link{color:#f4f4f4;}
+</style>
 
 <script>
 import { RouterView } from 'vue-router'

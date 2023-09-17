@@ -12,9 +12,17 @@ const router = createRouter({
             component: () => import('../views/ReaderApp.vue'),
             children: [
                 {
-                    path: 'list',
-                    name: 'reader-list',
-                    component: () => import('../views/ReaderArticleList.vue')
+                    path: '',
+                    redirect: 'reader/homepage',
+                },{
+                    path: 'homepage',
+                    name: 'reader-homepage',
+                    component: () => import('../views/HomePage.vue')
+                },
+                {
+                    path: 'search',
+                    name: 'reader-search',
+                    component: () => import('../views/ArticleSearch.vue')
                 },{
                     path: 'article/:articleId',
                     name: 'reader-article',
@@ -22,11 +30,23 @@ const router = createRouter({
                 },{
                     path: 'userpage/:username',
                     name: 'reader-userPage',
-                    component: () => import('../views/UserPage.vue'),
+                    component: () => import('../views/UserPage.vue')
+                }, {
+                    path: 'classlist',
+                    name: 'reader-classList',
+                    component: () => import('../views/ClassList.vue')
                 }, {
                     path: 'classpage/:className',
                     name: 'reader-classPage',
                     component: () => import('../views/ClassPage.vue')
+                }, {
+                    path: 'selfpage',
+                    name: 'reader-selfPage',
+                    component: () => import('../views/SelfPage.vue')
+                }, {
+                    path: 'about',
+                    name: 'reader-aboutPage',
+                    component: () => import('../views/AboutPage.vue')
                 },
             ]
         },
@@ -61,11 +81,7 @@ const router = createRouter({
                     path: 'timeline',
                     name: 'writer-timeline',
                     component: () => import('../views/TimeLine.vue'),
-                },{
-                    path: 'test',
-                    name: 'writer-test',
-                    component: () => import('../views/Test.vue'),
-                }
+                },
             ],
         }, {
             path: '/login',

@@ -1,5 +1,6 @@
 <template>
 <div class="user-message">
+    <ElLink @click="toReader">to reader</ElLink><br>
     <el-dropdown trigger="click">
         <div class="user-message-block">
             <el-icon color="#424242" size="21px" class="user-message-icon">
@@ -26,6 +27,11 @@ export default {
         return {
             username:'这是用户名这是用户名这是用户名这是用户名',
         }
+    },
+    methods:{
+        toReader() {
+            this.$router.push({name:'reader-homepage'})
+        },
     },
 }
 </script>
