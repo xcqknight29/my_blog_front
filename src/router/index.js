@@ -5,11 +5,11 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            redirect: 'writer/list',
+            redirect: 'reader',
         },
         {
             path: '/reader',
-            component: () => import('../views/ReaderApp.vue'),
+            component: () => import('../views/reader/ReaderApp.vue'),
             children: [
                 {
                     path: '',
@@ -17,42 +17,42 @@ const router = createRouter({
                 },{
                     path: 'homepage',
                     name: 'reader-homepage',
-                    component: () => import('../views/HomePage.vue')
+                    component: () => import('../views/reader/HomePage.vue')
                 },
                 {
                     path: 'search',
                     name: 'reader-search',
-                    component: () => import('../views/ArticleSearch.vue')
+                    component: () => import('../views/reader/ArticleSearch.vue')
                 },{
                     path: 'article/:articleId',
                     name: 'reader-article',
-                    component: () => import('../views/ReadArticle.vue')
+                    component: () => import('../views/reader/ReadArticle.vue')
                 },{
                     path: 'userpage/:username',
                     name: 'reader-userPage',
-                    component: () => import('../views/UserPage.vue')
+                    component: () => import('../views/reader/UserPage.vue')
                 }, {
                     path: 'classlist',
                     name: 'reader-classList',
-                    component: () => import('../views/ClassList.vue')
+                    component: () => import('../views/reader/ClassList.vue')
                 }, {
                     path: 'classpage/:className',
                     name: 'reader-classPage',
-                    component: () => import('../views/ClassPage.vue')
+                    component: () => import('../views/reader/ClassPage.vue')
                 }, {
                     path: 'selfpage',
                     name: 'reader-selfPage',
-                    component: () => import('../views/SelfPage.vue')
+                    component: () => import('../views/reader/SelfPage.vue')
                 }, {
                     path: 'about',
                     name: 'reader-aboutPage',
-                    component: () => import('../views/AboutPage.vue')
+                    component: () => import('../views/reader/AboutPage.vue')
                 },
             ]
         },
         {
             path: '/writer',
-            component: () => import('../views/MainApp.vue'),
+            component: () => import('../views/writer/MainApp.vue'),
             children: [
                 {
                     path: '',
@@ -60,27 +60,27 @@ const router = createRouter({
                 },{
                     path: 'login',
                     name: 'writer-login',
-                    component: () => import('../views/ToLogin.vue'),
+                    component: () => import('../views/writer/ToLogin.vue'),
                 },{
                     path: 'list',
                     name: 'writer-list',
-                    component: () => import('../views/ArticleList.vue'),
+                    component: () => import('../views/writer/ArticleList.vue'),
                 },{
                     path: 'edit/:articleId?',
                     name: 'writer-edit',
-                    component: () => import('../views/WriteArticle.vue'),
+                    component: () => import('../views/writer/WriteArticle.vue'),
                 },{
                     path: 'class',
                     name: 'writer-class',
-                    component: () => import('../views/ClassMenege.vue'),
+                    component: () => import('../views/writer/ClassMenege.vue'),
                 },{
                     path: 'userlist',
                     name: 'writer-userList',
-                    component: () => import('../views/UserList.vue'),
+                    component: () => import('../views/writer/UserList.vue'),
                 },{
                     path: 'timeline',
                     name: 'writer-timeline',
-                    component: () => import('../views/TimeLine.vue'),
+                    component: () => import('../views/writer/TimeLine.vue'),
                 },
             ],
         }, {

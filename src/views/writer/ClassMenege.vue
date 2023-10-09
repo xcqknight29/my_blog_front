@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import ClassTag from '../components/ClassTag.vue'
-import ClassAdder from '../components/ClassAdder.vue'
+import ClassTag from '../../components/ClassTag.vue'
+import ClassAdder from '../../components/ClassAdder.vue'
 export default {
   name: "ClassMenege",
   components: {

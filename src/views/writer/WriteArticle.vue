@@ -36,7 +36,7 @@
 </style>
 
 <script>
-import { getClassification } from '../static/js/get_data'
+import { getClassification } from '../../static/js/get_data'
 export default {
   name: "WriteArticle",
   emits: ['menuJump'],

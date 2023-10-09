@@ -14,7 +14,9 @@
     </header>
     <RouterView class="search_result" @menuChange="menuChange"></RouterView>
     <footer class="page_footer">
-      <div class="footer_block">myblog,xcqknight29</div>
+      <div class="footer_block footer_info">
+        <span>myblog,xcqknight29</span>
+      </div>
       <div class="footer_block footer_menu">
         <div class="menu_title">读者菜单</div>
         <ul>
@@ -76,6 +78,7 @@
   color:#f4f4f4;
   background-color:#353535;
   height:200px;
+  display: flex;
 }
 .footer_block {
   width:30%;
@@ -85,6 +88,10 @@
 .menu_title{
   margin:20px 30px;
   font-size:17px;
+}
+.footer_info{
+  text-align: center;
+  padding: 10% 0 30px 0;
 }
 .footer_item{list-style-type:none;}
 .footer_link{color:#f4f4f4;}
@@ -101,13 +108,13 @@ export default {
       {title:'搜索',routeName:'reader-search'},
       {title:'分类',routeName:'reader-classList'},
       {title:'个人',routeName:'reader-selfPage'},
-      {title:'关于',routeName:'reader-aboutPage'},
+      // {title:'关于',routeName:'reader-aboutPage'},
     ],
     writerMenu:[
-      {title:'文章列表',routeName:'writer-list'},
-      {title:'编辑文章',routeName:'writer-edit'},
-      {title:'分类列表',routeName:'writer-class'},
-      {title:'用户列表',routeName:'writer-userList'},
+      {title:'博文',routeName:'writer-list'},
+      {title:'编辑',routeName:'writer-edit'},
+      {title:'分类',routeName:'writer-class'},
+      {title:'用户',routeName:'writer-userList'},
       {title:'时间线',routeName:'writer-timeline'},
     ],
     selectedIndex:0,

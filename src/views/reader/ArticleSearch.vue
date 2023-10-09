@@ -2,11 +2,12 @@
 <div id="app">
   <div class="search_block">
     <ElInput class="search_input" v-model="input" v-on:keyup.enter="searchSubmit"></ElInput>
-    <ElButton class="search_button" @click="searchSubmit">search</ElButton>
+    <button class="search_button" @click="searchSubmit">search</button>
+    <!-- <ElButton class="search_button" @click="searchSubmit">search</ElButton> -->
   </div>
   <div>
     <div v-for="(article, index) in articles" :key="index">
-      <ElLink class="article_title" ref="">{{ article.title }}</ElLink><br>
+      <ElLink class="article_title" @click="toArticlePage(article.id)">{{ article.title }}</ElLink><br>
       <ElText class="small_text">{{ article.create_time }}</ElText><br>
       <div><ElText class="small_text">by </ElText><ElLink @click="toUserPage(article.author)">{{ article.author_name }}</ElLink></div>
       <ElText>{{ article.classification_name }}</ElText><br>
@@ -26,7 +27,16 @@
 .search_input {width:80%;}
 .search_button {
   margin:0 10px;
-  width:8%;
+  padding: 0 5px;
+  color: #606266;
+  height:30px;
+  border:1px solid #dcdfe6;
+  border-radius: 3px;
+  background-color: #ffffff;
+  transition: 0.8s;
+}
+.search_button:hover {
+  border-color: #626262;
 }
 .article_title{font-size:18px;}
 .small_text{font-size:12px;}
@@ -61,8 +71,11 @@ export default {
       this.articles = result.data
       this.total = result.data.length
     },
+    toArticlePage(articleId) {
+      this.$router.push({name: 'reader-article', params: {articleId: articleId}})
+    },
     toUserPage(authorId) {
-      this.$router.push({name:'reader-userPage', params:{id:authorId}})
+      this.$router.push({name: 'reader-userPage', params: {id:authorId}})
     },
   },
 }

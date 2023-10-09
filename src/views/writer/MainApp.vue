@@ -25,8 +25,8 @@
 
 <script>
 import { RouterView } from 'vue-router'
-import MenuList from '../components/MenuList.vue'
-import UserMessage from '../components/UserMessage.vue'
+import MenuList from '../../components/MenuList.vue'
+import UserMessage from '../../components/UserMessage.vue'
 export default {
     name: 'MainApp',
     components: {
