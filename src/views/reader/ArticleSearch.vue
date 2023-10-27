@@ -16,6 +16,9 @@
       </div><br>
     </div><br>
   </div>
+  <div>
+    <ElPagination layout="prev, pager, next" @current-change="pageChange" :total="total" />
+  </div>
 </div>
 </template>
 
@@ -51,14 +54,14 @@ export default {
       input:'',
       content:'',
       page:1,
-      size:20,
+      size:10,
       total:0,
       articles: [],
     };
   },
   created() {
     this.$emit('menuChange',1)
-    this.searchSubmit()
+    this.getArticleList()
   },
   methods: {
     async searchSubmit() {
@@ -68,8 +71,12 @@ export default {
     async getArticleList() {
       const params = {inputContent:this.content?this.content:undefined, page:this.page, size:this.size}
       const result = await this.$sendAndThrow('get', 'writer/article', params)
-      this.articles = result.data
-      this.total = result.data.length
+      this.articles = result.data.data
+      this.total = result.data.total
+    },
+    pageChange(pageNum) {
+      this.page = pageNum
+      this.searchSubmit()
     },
     toArticlePage(articleId) {
       this.$router.push({name: 'reader-article', params: {articleId: articleId}})

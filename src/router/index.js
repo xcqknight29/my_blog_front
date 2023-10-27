@@ -72,7 +72,15 @@ const router = createRouter({
                 },{
                     path: 'class',
                     name: 'writer-class',
-                    component: () => import('../views/writer/ClassMenege.vue'),
+                    component: () => import('../views/writer/ClassManage.vue'),
+                },{
+                    path: 'class/:cname',
+                    name: 'writer-class-edit',
+                    component: () => import('../views/writer/ClassEdit.vue'),
+                },{
+                    path: 'tag',
+                    name: 'writer-tag',
+                    component: () => import('../views/writer/TagManage.vue'),
                 },{
                     path: 'userlist',
                     name: 'writer-userList',
@@ -87,6 +95,10 @@ const router = createRouter({
             path: '/login',
             name: 'login',
             component: () => import('../views/LoginPage.vue')
+        }, {
+            path: '/test',
+            name: 'test',
+            component: () => import('../views/Test.vue')
         },
 
     ]

@@ -16,7 +16,7 @@
     </div>
   </div>
   <!-- 搜索 -->
-  <div class="classes_block">
+  <div class="classes_block search_part">
     <div class="classes_title">搜索分类</div>
     <div class="search_block">
       <input class="search_input" v-model="input" v-on:keyup.enter="getClassesBySearch">
@@ -42,7 +42,7 @@
   font-size:30px;
   font-weight:bold;
   color:#282828;
-  background-color:#b7b7b7;
+  /* background-color:#b7b7b7; */
   border-radius:3px;
 }
 .class_item{
@@ -59,6 +59,9 @@
   margin:10px 10%;
 }
 .item_name:hover{color:#409eff;}
+.search_part{
+  min-height: 350px;
+}
 .search_block{
   display:flex;
   align-items: center;
@@ -67,7 +70,7 @@
 .search_input{
   display:inline-block;
   height:30px;
-  border:0px;
+  border:1px solid #353535;
   border-radius:4px;
   padding:0 10px;
   width:70%;

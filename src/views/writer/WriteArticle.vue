@@ -1,15 +1,21 @@
 <template>
-<div>
-  <ClearTheInput />
-  <el-select class="select_class" v-model="classId" filterable placeholder="分类">
-    <el-option v-for="item in classList" :key="item.id" :label="item.classification_name" :value="item.id" />
-  </el-select>
-  <el-input class="input_title" placeholder="标题" v-model="title" />
-  <mavon-editor class="mavon_editor" v-model="articleText" />
-  <el-button class="submit_butt" @click="submitArticle">
-    提交
-  </el-button>
-</div>
+  <div>
+    <ClearTheInput />
+    <el-select class="select_class" v-model="classId" filterable placeholder="分类">
+      <el-option v-for="item in classList" :key="item.id" :label="item.classification_name" :value="item.id" />
+    </el-select>
+    <el-input class="input_title" placeholder="标题" v-model="title" />
+    <div>
+      <ElTag v-for="(tag, index) in tagList" :index="index">
+        {{ tag.tag_name }}
+      </ElTag>
+      <ElTag></ElTag>
+    </div>
+    <mavon-editor class="mavon_editor" v-model="articleText" />
+    <el-button class="submit_butt" @click="submitArticle">
+      提交
+    </el-button>
+  </div>
 </template>
 
 <style scoped>
@@ -45,6 +51,7 @@ export default {
       articleId: 0,
       classId: '',
       title: '',
+      tagList: [],
       articleText: '',
       classList: [{ id: 1, classification_name: 'class1' }]
     };
@@ -68,6 +75,7 @@ export default {
       this.articleId = result.data.id;
       this.title = result.data.title;
       this.classId = result.data.classification;
+      this.tagList = result.data
       this.articleText = result.data.content;
     },
     async submitArticle() {

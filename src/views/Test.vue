@@ -1,6 +1,7 @@
 <template>
     <button @click="createPerson">createPerson</button>
     {{ message }}
+    <button @click="addTestData">添加测试文章</button>
 </template>
 
 <script>
@@ -33,7 +34,17 @@ export default {
                 headers: {'X-CSRFtoken': document.cookie.match("(^| )csrftoken=([^;]*)(;|$)")[2]},
             })
             console.log(message);
-        }
+        },
+        async addTestData() {
+            for (let i = 0; i < 100; i++) {
+                const data = {
+                    title: 'Test Article - '+i,
+                    classification: 1,
+                    content: 'This is a test article',
+                };
+                const [error, result] = await this.$send('post', '/writer/article', null, data);
+            }
+        },
     },
 }
 </script>

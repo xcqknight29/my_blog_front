@@ -25,6 +25,7 @@
                     </template>
                 </el-table-column>
             </el-table>
+            <el-pagination layout="prev, pager, next" v-model:current-page="page" @update:current-page="pageChange" :total="total"></el-pagination>
         </el-main>
     </el-container>
 </template>
@@ -49,13 +50,18 @@ export default {
         async getArticle() {
             const method = 'get'
             const url = '/writer/article'
-            const params = {page:this.page, size:this.size, input:this.input}
+            const params = {page: this.page, size: this.size, input: this.input ? this.input : undefined}
             const [error,result] = await this.$send(method, url, params)
             if (error) {
                 this.$message({type: 'error', message: error})
             } else {
-                this.tableData = result.data
+                this.tableData = result.data.data
+                this.total = result.data.total
             }
+        },
+        pageChange(pageNum) {
+            this.page = pageNum
+            this.getArticle()
         },
         clearInput() {
             this.input = ''
