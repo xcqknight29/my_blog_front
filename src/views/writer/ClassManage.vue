@@ -1,8 +1,11 @@
 <!-- 管理分类 -->
 <template>
     <div>
+
         <div class="compHeader">
-            <ElButton class="addButt" type="primary" @click="showDialog = true">添加分类</ElButton>
+
+            <el-button class="addButt" type="primary" @click="showDialog = true">添加分类</el-button>
+            
             <el-dialog title="添加分类" width="30%" v-model="showDialog">
                 <div class="dialog_main">
                     <div class="main_label">分类名</div>
@@ -13,21 +16,25 @@
                     <el-button type="primary" @click="submitNewClass">提交</el-button>
                 </div>
             </el-dialog>
+
         </div>
+
         <div>
-            <ElTable :data="tableData">
-                <ElTableColumn prop="classification_name" label="分类名"></ElTableColumn>
-                <ElTableColumn prop="article_num" label="文章数"></ElTableColumn>
-                <ElTableColumn label="修改">
+            <el-table :data="tableData">
+                <el-table-column prop="classification_name" label="分类名"></el-table-column>
+                <el-tabl-column prop="article_num" label="文章数"></el-tabl-column>
+                <el-table-column label="修改">
                     <template template #default="scope">
-                        <ElButton @click="editClass(scope.row)">编辑分类</ElButton>
+                        <el-button @click="editClass(scope.row)">编辑分类</el-button>
                     </template>
-                </ElTableColumn>
-            </ElTable>
+                </el-table-column>
+            </el-table>
         </div>
+
         <div>
-            <ElPagination layout="prev, pager, next" :page-size="10" v-model:current-page="page" @update:current-page="pageChange" :total="total"></ElPagination>
+            <el-pagination layout="prev, pager, next" :page-size="10" v-model:current-page="page" @update:current-page="pageChange" :total="total"></el-pagination>
         </div>
+
     </div>
 </template>
 
@@ -58,10 +65,14 @@
 
 <script>
 export default {
+
     name: 'ClassManager',
+
+    emits: ['menuJump'],
+
     data() {
         return {
-            showDialog: true,
+            showDialog: false,
             input: '',
             page: 1,
             total: 0,
@@ -70,8 +81,10 @@ export default {
     },
     mounted() {
         this.getClass()
+        this.$emit('menuJump', 2)
     },
     methods: {
+
         async getClass() {
             const params = {
                 page: this.page,
@@ -82,13 +95,16 @@ export default {
             this.tableData = result.data.data
             this.total = result.data.total
         },
+
         pageChange(page) {
             this.page = page
             this.getClass()
         },
+
         editClass(row) {
             this.$router.push({name: 'writer-class-edit', params: {cname: row.classification_name}})
         },
+
         async submitNewClass() {
             const data = {
                 classification_name: this.input
@@ -99,8 +115,10 @@ export default {
                 return
             }
             this.$message({type: 'success', message: '添加成功'})
+            this.getClass()
             this.showDialog = false
         },
+
     },
 }
 </script>

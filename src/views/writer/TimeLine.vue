@@ -19,46 +19,51 @@ export default {
         return {
             page: 1,
             total: 0,
-            articleList: [
-                // { title: 'aaaa', create_time: '2023-07-21' },
-                // { title: 'bbb', create_time: '2023-07-01' },
-                // { title: 'cccc', create_time: '2023-06-23' },
-                // { title: 'ddd', create_time: '2022-12-01' },
-                // { title: 'eeeee', create_time: '2000-09-29' },
-                // { title: 'aaaa', create_time: '2023-07-21' },
-                // { title: 'bbb', create_time: '2023-07-01' },
-                // { title: 'cccc', create_time: '2023-06-23' },
-                // { title: 'ddd', create_time: '2022-12-01' },
-                // { title: 'eeeee', create_time: '2000-09-29' },
-                // { title: 'aaaa', create_time: '2023-07-21' },
-                // { title: 'bbb', create_time: '2023-07-01' },
-                // { title: 'cccc', create_time: '2023-06-23' },
-                // { title: 'ddd', create_time: '2022-12-01' },
-                // { title: 'eeeee', create_time: '2000-09-29' },
-                // { title: 'aaaa', create_time: '2023-07-21' },
-                // { title: 'bbb', create_time: '2023-07-01' },
-                // { title: 'cccc', create_time: '2023-06-23' },
-                // { title: 'ddd', create_time: '2022-12-01' },
-                // { title: 'eeeee', create_time: '2000-09-29' },
-            ],
+            articleList: [],
+            /*articleList: [
+                { title: 'aaaa', create_time: '2023-07-21' },
+                { title: 'bbb', create_time: '2023-07-01' },
+                { title: 'cccc', create_time: '2023-06-23' },
+                { title: 'ddd', create_time: '2022-12-01' },
+                { title: 'eeeee', create_time: '2000-09-29' },
+                { title: 'aaaa', create_time: '2023-07-21' },
+                { title: 'bbb', create_time: '2023-07-01' },
+                { title: 'cccc', create_time: '2023-06-23' },
+                { title: 'ddd', create_time: '2022-12-01' },
+                { title: 'eeeee', create_time: '2000-09-29' },
+                { title: 'aaaa', create_time: '2023-07-21' },
+                { title: 'bbb', create_time: '2023-07-01' },
+                { title: 'cccc', create_time: '2023-06-23' },
+                { title: 'ddd', create_time: '2022-12-01' },
+                { title: 'eeeee', create_time: '2000-09-29' },
+                { title: 'aaaa', create_time: '2023-07-21' },
+                { title: 'bbb', create_time: '2023-07-01' },
+                { title: 'cccc', create_time: '2023-06-23' },
+                { title: 'ddd', create_time: '2022-12-01' },
+                { title: 'eeeee', create_time: '2000-09-29' },
+            ],*/
         };
     },
-    created() {
-        this.$emit('menuJump','5')
+
+    mounted() {
+        this.$emit('menuJump', 4)
     },
+
     methods: {
-        // async getAllArticles() {
-        //     const method = 'get'
-        //     const url = 'writer/article'
-        //     const params = {page:1, size:10}
-        //     const [error,result] = await this.$send(method,url,params)
-        //     if(error) {
-        //         this.$message({type:'error', message:error})
-        //         return
-        //     }
-        //     this.articleList = result.data
-        //     this.page++
-        // },
+
+        /* async getAllArticles() {
+             const method = 'get'
+             const url = 'writer/article'
+             const params = {page:1, size:10}
+             const [error,result] = await this.$send(method,url,params)
+             if(error) {
+                 this.$message({type:'error', message:error})
+                 return
+             }
+             this.articleList = result.data
+             this.page++
+        },*/
+
         async loadArticle() {
             const params = {page:this.page, size:10}
             const [error, result] = await this.$send('get', 'writer/article', params)
@@ -69,9 +74,11 @@ export default {
             this.articleList = this.articleList.concat(result.data.data)
             this.page++
         },
+
         toArticlePage(id) {
             this.$router.push({name: 'reader-article', params:{articleId: id}})
         },
+
     },
 }
 

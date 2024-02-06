@@ -3,18 +3,49 @@
     <div>
         <div>
             <span class="text_class">{{ '将分类 '+className+' 更改为 ' }}</span>
-            <el-input class="input_class" v-model="input"></el-input>
-            <el-popover :visible="showPopover" width="180px">
+            <el-input class="input_class" v-model="input" />
+            <el-popover :visible="showEdit" width="180px">
+                <template #reference>
+                    <el-button 
+                        @click="showEditPopover"
+                        >修改</el-button>
+                </template>
                 <div class="pop_block">
                     <div class="pop_text">真的要修改分类名吗？</div>
                     <div class="pop_butt">
-                        <el-button size="small" @click="showPopover = false">取消</el-button>
-                        <el-button type="primary" size="small" @click="submitHandler">确定</el-button>
+                        <el-button 
+                            size="small" 
+                            @click="showEdit = false"
+                            >取消</el-button>
+                        <el-button
+                            type="primary"
+                            size="small"
+                            @click="editHandler"
+                            >确定</el-button>
                     </div>
                 </div>
+            </el-popover>
+            <el-popover :visible="showDelete" width="180px">
                 <template #reference>
-                    <el-button @click="showPopover = true">修改</el-button>
+                    <el-button 
+                        type="warning" 
+                        @click="showDeletePopover"
+                        >删除</el-button>
                 </template>
+                <div class="pop_block">
+                    <div class="pop_text">真的要删除分类吗？该分类下的文章将被归类到未分类中。</div>
+                    <div class="pop_butt">
+                        <el-button 
+                            size="small" 
+                            @click="showDelete = false"
+                            >取消</el-button>
+                        <el-button 
+                            type="primary" 
+                            size="small" 
+                            @click="submitDelete"
+                            >确定</el-button>
+                    </div>
+                </div>
             </el-popover>
         </div>
         <div>
@@ -44,7 +75,8 @@
     /* width: 140px; */
 }
 .pop_text {
-    height: 25px;
+    /* height: 25px; */
+    padding: 0.5em;
 }
 .pop_butt {
     float: right;
@@ -60,25 +92,33 @@
 </style>
 
 <script>
-import { OptionProps } from 'element-plus/es/components/select-v2/src/defaults'
+
+import { sleep } from "../../static/js/sleep_util"
 
 export default {
+
     name: 'ClassEdit',
-    data() {return{
+
+    data() { return {
         classId: '',
         className: '',
+        articleCount: '',
         input: '',
-        showPopover: true,
+        showEdit: false,
+        showDelete: false,
         page: 1,
         size: 10,
         total: 0,
         articleList: [],
-    }},
+    } },
+
     mounted() {
         this.className = this.$route.params.cname
         this.getArticle()
     },
+
     methods: {
+
         async getArticle() {
             const params = {
                 className: this.className,
@@ -87,15 +127,22 @@ export default {
             }
             const result = await this.$sendAndThrow('get', 'reader/articleByClass', params)
             if(!result) return
-            console.log('get article by class: success')
             this.total = result.data.total
             this.articleList = result.data.data
         },
+
         pageChange(currentPage) {
             this.page = currentPage
             this.getArticle()
         },
-        submitHandler() {
+
+        // 显示编辑分类确认窗口
+        showEditPopover() {
+            this.showEdit = !this.showEdit
+            this.showDelete = false
+        },
+
+        editHandler() {
             if (!this.input) {
                 this.$message({type: 'info', message: '请输入修改后的分类名'})
                 return
@@ -106,6 +153,7 @@ export default {
             }
             this.submitEdit()
         },
+
         async submitEdit() {
             const data = {
                 forward_name: this.className,
@@ -116,6 +164,24 @@ export default {
             this.$message({type: 'success', message: '修改分类成功'})
             this.$router.push({name: 'writer-class-edit', params: {cname: data.classification_name}})
         },
+
+        showDeletePopover() {
+            this.showDelete = !this.showDelete
+            this.showEdit = false
+        },
+
+        async submitDelete() {
+            const data = {
+                className: this.className,
+            }
+            const result = await this.$sendAndThrow('delete', 'writer/classification', null, data)
+            if (!result) return
+            this.$message({type: 'success', message: '删除分类成功'})
+            await sleep(3000)
+            this.$router.push({name: 'writer-class'})
+        },
+
     }, 
+
 }
 </script>

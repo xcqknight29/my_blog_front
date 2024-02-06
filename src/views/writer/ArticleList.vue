@@ -32,8 +32,11 @@
 
 <script>
 export default {
+
     name: "ArticleList",
+
     emits: ['menuJump'],
+
     data() {
         return {
             page: 1,
@@ -43,10 +46,14 @@ export default {
             tableData: [],
         }
     },
+
     mounted() {
         this.getArticle()
+        this.$emit('menuJump', 0)
     },
+
     methods: {
+
         async getArticle() {
             const method = 'get'
             const url = '/writer/article'
@@ -59,22 +66,28 @@ export default {
                 this.total = result.data.total
             }
         },
+
         pageChange(pageNum) {
             this.page = pageNum
             this.getArticle()
         },
+
         clearInput() {
             this.input = ''
         },
+
         toWrite(row) {
-            this.$emit('menuJump','2')
-            this.$router.push({name:'writer-edit', params:{articleId:row.id}})
+            this.$emit('menuJump', 1)
+            this.$router.push({name: 'writer-edit', params: { articleId:row.id } })
         },
+        
     }
+
 }
 </script>
 
 <style>
+
 .float-right {
     float: right;
 }
@@ -82,4 +95,5 @@ export default {
 .inp_short {
     max-width: 300px;
 }
+
 </style>

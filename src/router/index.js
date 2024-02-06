@@ -6,28 +6,26 @@ const router = createRouter({
         {
             path: '/',
             redirect: 'reader',
-        },
-        {
+        }, {
             path: '/reader',
             component: () => import('../views/reader/ReaderApp.vue'),
             children: [
                 {
                     path: '',
                     redirect: 'reader/homepage',
-                },{
+                }, {
                     path: 'homepage',
                     name: 'reader-homepage',
                     component: () => import('../views/reader/HomePage.vue')
-                },
-                {
+                }, {
                     path: 'search',
                     name: 'reader-search',
                     component: () => import('../views/reader/ArticleSearch.vue')
-                },{
+                }, {
                     path: 'article/:articleId',
                     name: 'reader-article',
                     component: () => import('../views/reader/ReadArticle.vue')
-                },{
+                }, {
                     path: 'userpage/:username',
                     name: 'reader-userPage',
                     component: () => import('../views/reader/UserPage.vue')
@@ -49,47 +47,46 @@ const router = createRouter({
                     component: () => import('../views/reader/AboutPage.vue')
                 },
             ]
-        },
-        {
+        }, {
             path: '/writer',
             component: () => import('../views/writer/MainApp.vue'),
             children: [
                 {
                     path: '',
                     redirect: 'writer/list'
-                },{
+                }, {
                     path: 'login',
                     name: 'writer-login',
                     component: () => import('../views/writer/ToLogin.vue'),
-                },{
+                }, {
                     path: 'list',
                     name: 'writer-list',
                     component: () => import('../views/writer/ArticleList.vue'),
-                },{
+                }, {
                     path: 'edit/:articleId?',
                     name: 'writer-edit',
                     component: () => import('../views/writer/WriteArticle.vue'),
-                },{
+                }, {
                     path: 'class',
                     name: 'writer-class',
                     component: () => import('../views/writer/ClassManage.vue'),
-                },{
+                }, {
                     path: 'class/:cname',
                     name: 'writer-class-edit',
                     component: () => import('../views/writer/ClassEdit.vue'),
-                },{
+                }, {
                     path: 'tag',
                     name: 'writer-tag',
                     component: () => import('../views/writer/TagManage.vue'),
-                },{
+                }, {
                     path: 'userlist',
                     name: 'writer-userList',
                     component: () => import('../views/writer/UserList.vue'),
-                },{
+                }, {
                     path: 'timeline',
                     name: 'writer-timeline',
                     component: () => import('../views/writer/TimeLine.vue'),
-                },
+                }, 
             ],
         }, {
             path: '/login',
